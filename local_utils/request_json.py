@@ -9,7 +9,7 @@ def send_request_emotion(video_emotion, voice_emotion):
     }
 
     # 요청을 보낼 URL 지정
-    url_emotion = "http://172.21.119.147:5001/emotion"
+    url_emotion = "http://192.168.0.96:5001/emotion"
     
     # 필요한 경우 헤더 설정 (예: content-type)
     headers = {'Content-Type': 'application/json'}
@@ -30,7 +30,7 @@ def send_request_text(stance, interpretation):
     }
 
     # 요청을 보낼 URL 지정
-    url_emotion = "http://172.21.119.147:5001/text"
+    url_emotion = "http://192.168.0.96:5001/text"
     
     # 필요한 경우 헤더 설정 (예: content-type)
     headers = {'Content-Type': 'application/json'}

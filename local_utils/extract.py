@@ -3,6 +3,7 @@ import pyautogui
 import cv2
 from moviepy.editor import VideoFileClip
 import requests
+import os 
 
 def start_recording():
     pyautogui.hotkey('command', 'shift', '5')
@@ -14,6 +15,13 @@ def stop_recording():
     pyautogui.hotkey('command', 'ctrl', 'esc')
     time.sleep(2)
     
+def get_most_recent_file(directory):
+    files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    most_recent_file = max(files, key=lambda f: os.path.getmtime(os.path.join(directory, f)))
+    
+    return most_recent_file
+
+
 def MOV_to_MP4(mov_file_path):
     mp4_file_path = 'powell video.mp4' # mp4파일 path
 

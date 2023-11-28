@@ -3,12 +3,15 @@ import face_emotion
 import voice_emotion
 import text_classification
 import request_json
+import os 
 
 if __name__ == "__main__":
     try:
-        # start_recording()
-        # stop_recording()
-        mov_file_path = 'powell video.mov'  # File Name 불러오는 방법 수정해야 함
+        extract.start_recording()
+        extract.stop_recording()
+        desktop_path = os.path.expanduser("~/Desktop")
+        recent_file = extract.get_most_recent_file(desktop_path)
+        mov_file_path =  recent_file  
         extract.MOV_to_MP4(mov_file_path)
 
         # face
