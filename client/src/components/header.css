@@ -1,6 +1,24 @@
 .header {
-    position:fixed;
-    width : 100%;
-    background-color: white;
-}
+    text-align: left;
+    padding: 20px; /* Adjust padding as needed */
+     
+  }
+  
+  .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333; /* Adjust the color as needed */
+  }
+  
+  .logo {
+    width: 35px;
+    height: auto;
+    margin-right: 10px; /* Adjust margin as needed */
+  }
+  
+  .brand-name {
+    font-size: 2rem; /* Adjust font size as needed */
+    font-weight: bold; /* Add this line to make the font bold */
 
+  }

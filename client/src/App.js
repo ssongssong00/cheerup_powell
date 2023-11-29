@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/header';
+import StanceComponent from './components/StanceComponent'; // Import StanceComponent
+import InterpretationComponent from './components/InterpretationComponent'; // Import StanceComponent
+
 import './App.css'; // Import your CSS file
 
 const App = () => {
@@ -20,27 +23,36 @@ const App = () => {
   }, []);
 
   return (
-    
-    <div>
-      <Header/>
-    <div  className="container">
-
-    <iframe
-      width="700"
-      height="400"
-      src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
-      frameBorder="0"
-      allowFullScreen
-      title="Live Video"
-    />
+    <div className="background_color">
+      <Header />
+      <StanceComponent width={350} height={350} left={670} top={0} /> 
+      <StanceComponent width={175} height={170} left={1035} top={0} />
+      <StanceComponent width={175} height={170} left={1035} top={180} />
+      <div>
+      <InterpretationComponent
+        containerWidth={1020}
+        containerHeight={330}
+        contentWidth={920}
+        contentHeight={50}
+        contentTop={360}
+      />
+      {/* Use the component with different sizes as needed */}
+      <InterpretationComponent
+        containerWidth={1020}
+        containerHeight={330}
+        contentWidth={920}
+        contentHeight={50}
+        contentTop={720}
+      />
     </div>
-      <h1>Emotions</h1>
-      <pre>{JSON.stringify(emotions, null, 2)}</pre>
-
-      <h1>Text</h1>
-      <pre>{JSON.stringify(text, null, 2)}</pre>
-
-      {/* Add two more round-square divs as needed */}
+      <iframe
+        width="650"
+        height="350"
+        src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
+        frameBorder="0"
+        allowFullScreen
+        title="Live Video"
+      />
     </div>
   );
 };
