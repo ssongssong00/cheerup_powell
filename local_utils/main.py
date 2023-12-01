@@ -7,6 +7,7 @@ import os
 
 if __name__ == "__main__":
     try:
+        # data extraction
         extract.start_recording()
         extract.stop_recording()
         desktop_path = os.path.expanduser("~/Desktop")
