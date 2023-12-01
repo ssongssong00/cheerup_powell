@@ -1,0 +1,490 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <title>Cap Stone</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- flask서버에서 클라이언트에 css파일을 넘겨줘야함 -->
+    <style>
+        /* header부분 */
+        header{
+            width: 100%;
+            min-height: 60px;
+            height:5%;
+            flex-shrink: 0;
+            border: 1px solid #D9D9D9;
+            background: #FFF;
+            display: flex;
+            justify-content: center; /* 가로 방향 가운데 정렬 */  
+            align-items: center; /* 세로 방향 가운데 정렬 */
+        }
+        #head-container{
+            width: 100%;
+            display: flex;
+            justify-content: left; /* 가로 방향 가운데 정렬 */  
+            align-items: center; /* 세로 방향 가운데 정렬 */
+        }
+        .logo-text{
+            color: #000;
+            font-family: "Times New Roman";
+            font-size: 25px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%; /* 50.4px */
+            letter-spacing: -0.72px;
+        }
+        body {
+            background: #F3F6FE;
+            /* font-family: 'Times New Roman', Times, serif; */
+            font-family: "AppleGothic";
+            margin: 0;
+            padding: 0;
+            min-width: 1600px;
+            min-height: 900px;
+            width: 100%;
+            /* font-family: Arial, sans-serif; */
+            height: 100vh; /* 뷰포트 높이의 100%로 설정 */
+            position: absolute; /* body를 relative로 설정하여 절대 위치로 설정된 footer를 기준으로 설정 */
+        }
+        /* container1부분 */
+        #container-1{
+            height: 43%;
+            display: flex; /* Flexbox를 사용하여 요소들을 가로로 정렬합니다 */
+            /* border: 1px solid #D9D9D9; */
+        }
+        /* 유튜브 영상 스트리밍 css */
+        #video-container{
+            width:49%;  
+            border-radius: 10px;
+            border: 1px solid #D9D9D9;
+            background: #FFF;
+            margin: 1%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #emotion-container{
+            width: 50%;
+            display: flex; /* Flexbox를 사용하여 요소들을 가로로 정렬합니다 */
+            flex-direction: column;
+            border-radius: 10px;
+            border: 1px solid #D9D9D9;
+            margin: 1%;
+
+            align-items: center; /* 내부 요소들을 세로 가운데 정렬 */
+            flex: 1; /* 동일한 너비로 설정 */
+            text-align: center; /* 내부 텍스트를 가운데 정렬 */
+            justify-content: center; /* 내부 요소들을 세로 가운데 정렬 */
+        }
+        #text-emotion,
+        #face-emotion,
+        #voice-emotion {
+            display: flex;
+            flex-direction: column; /* 내부 요소들을 세로로 정렬 */
+            align-items: center; /* 내부 요소들을 세로 가운데 정렬 */
+            flex: 1; /* 동일한 너비로 설정 */
+            text-align: center; /* 내부 텍스트를 가운데 정렬 */
+            justify-content: center; /* 내부 요소들을 세로 가운데 정렬 */
+        }
+        .emotion-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 250px; /* 부모 요소의 높이를 기준으로 내부 요소를 세로로 가운데 정렬 */
+            width: 250px;
+            margin: 3% 1%;
+            border-radius: 35px;
+            background: linear-gradient(180deg, #ECACF3 0%, #6189F0 100%);
+        }
+        .current{
+            color: #FFF;
+            font-family: 'Times New Roman';
+            font-size: 17px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 140%; /* 28px */
+        }
+        #text-emotion-value,
+        #face-emotion-value,
+        #voice-emotion-value {
+            color: #FFF;
+            font-family: 'Times New Roman';
+            font-size: 35px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 140%; /* 56px */
+        }
+        .explain{
+            color: #FFF;
+            text-align: center;
+            font-size: 10px;
+            font-style: normal;
+            line-height: 140%; /* 14px */
+        }
+        /* container2 부분 */
+        #container-2{
+            height:40%; 
+            
+            padding-left: 1%;
+            padding-right: 1%;
+            padding-bottom: 1%;
+            display: flex; /* Flexbox를 사용하여 요소들을 가로로 정렬합니다 */
+            justify-content: left;
+        }
+        #text-container{
+            height: 85%;
+            width: 100%;
+            border: 1px solid #D9D9D9;
+            border-radius: 10px;
+            background-color: #FFF;
+            /* padding: 1%; */
+            word-break: break-all;
+            overflow-y: scroll;
+        }
+        .interpret-container{
+            margin: 1%;
+            border: 1px solid #D9D9D9;
+            border-radius: 20px;
+            background-color: #dce5ff;
+
+        }
+        .text-box{
+            display: flex;
+            overflow-x: scroll;
+            padding: 2%;
+            font-size: 14px;
+        }
+        /* 채팅창 css */
+        #user-count-container{
+            font-family: 'Times New Roman', Times, serif; /* Times New Roman 폰트로 설정 */
+
+        }
+        #chat-box {
+            /* position:fixed; */
+            padding-left: 1%;
+            bottom: 5%;
+            /* right: 10px; */
+            width:30%;
+            min-width: 400px;
+            background-color: #FFF;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-left: 1%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+        #messages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        #messages li {
+            margin-bottom: 5px;
+        }
+        #nickname-input {
+            display: block;
+            width: calc(100% - 380px);
+            margin-top: 5px;
+            margin-right: 3px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        #chat-input {
+            display: block;
+            width: calc(100% - 22px);
+            margin-top: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        #send-button {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            padding: 8px;
+            background-color: #3F64C6;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+        #input-container {
+            display: flex;
+            width: 100%;
+        }
+        footer{
+            border: 1px solid #D9D9D9;
+            background-color: #3F64C6;
+            height: 9%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.min.js"></script> 
+</head> 
+<body>
+    <header>
+        <div id = "head-container">
+            <img src="{{ url_for('static', filename=logo_path) }}" alt="로고" class="logo" style="padding-left: 1%; width:40p; height:40px">
+            <span class="logo-text" style="padding-left: 1%;" >Fomc Real-time Analysis Service</span>
+        </div>
+    </header>
+    <!--1차 경계선-->
+    <div id = "container-1">
+        <!--------------------스트리밍 html ------------------------>
+        <div id="video-container">
+            <iframe width="624" height="351" src="https://www.youtube.com/embed/ohuJH9fld3w?si=BoTP93CkaAKXz3jq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        
+        <!--------------------영상 음성 감정 html ------------------------>
+        <div id = "emotion-container">
+            <div style="padding-top: 3%; text-align: center; 
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%;
+                justify-content: center;
+                font-weight: bold;
+                 /* 42px */">
+                FOMC 미연준의장의 언어적, 비언어적 지표
+            </div>
+            <div style="display: flex;">
+                <div class = "emotion-box">
+                    <div id = "text-emotion">
+                        <div class = "current">Currently Stance</div>
+                        <div id = "text-emotion-value">stance_score</div>
+                        <br>
+                        <div class = "explain" style="font-family: AppleGothic;">지난 30초 동안의 연준의장의 <br> 발화내용을 분석합니다. <br><br> Dovish는 금리를 내리자는 입장, <br> Hawkish는 금리를 올리자는 입장</div> 
+                    </div>    
+                </div>
+                <div class = "emotion-box">
+                    <div id = "face-emotion">
+                        <div class = "current">Currently Face Emotion</div>
+                        <div id = "face-emotion-value">face emotion</div>
+                        <br>
+                        <div class = "explain">지난 10초 동안의 연준의장의 <br> 얼굴 감정을 분석합니다. <br><br> Positive는 긍정적인 표정, <br> Negative는 부정적인 표정, <br> Neutral은 중립적인 표정입니다. </div>
+                    </div>
+                </div>
+                <div class = "emotion-box">
+                    <div id = "voice-emotion">
+                        <div class = "current">Currently Voice Emotion</div>
+                        <div id = "voice-emotion-value">voice emotion</div>
+                        <br>
+                        <div class = "explain">지난 10초 동안의 연준의장의 <br> 목소리 감정을 분석합니다. <br><br> Positive는 긍정적인 감정, <br> Negative는 부정적인 어조, <br> Neutral은 중립적인 어조입니다. </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--------------------발화 해석 html ------------------------>
+
+    </div>
+    <div id = "container-2">
+        <div style="width: 69%">
+            <div id = "text-container-head"
+                            style="
+                            background-color: #f3f3f3;
+                            border:#878787;
+                            border-radius: 10px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;">
+                    <div style="padding-left: 3%; padding-top: 1%; font-weight: bold; font-size: 15px;">실시간 해석</div>
+                    <div style="padding-left: 3%; padding-top: 3px; padding-bottom: 1%; color:#806D6D; font-size: 10px;">30초 단위로 기자회견 스크립트와 그에 대한 해석 및 해설을 제공합니다.</div>    
+                </div>
+            <div id = "text-container">
+                <div class = "interpret-container">
+                    <div style="display: flex; padding-top: 1%; font-size: 10px">
+                        <div id = "stance-score" style="padding-left: 2%">Stance Score</div>
+                        <div id = "time-line" style="padding-left:85%;">30초 전</div>
+                    </div>
+                    <div class = "text-box" id="text">
+                        <div style="font-weight: bold; color:#806D6D; min-width: 35px">원문</div><div id= "text-value" style="padding-left: 1%;">내용</div>
+                    </div>
+                    <div class = "text-box" id="translatation">
+                        <div style="font-weight: bold; color:#806D6D; min-width: 35px;">번역</div><div id= "translation-value" style="padding-left: 1%;">내용</div>
+                    </div>
+                    <div class = "text-box" id="interpretation">
+                        <div style="font-weight: bold; color:#806D6D; min-width: 35px;">해석</div><div id= "interpretation-value" style="padding-left: 1%;">내용</div>
+                    </div>   
+                </div>
+
+                <hr>
+                <div style="padding: 2%; padding-right: 60%">
+                    <div style="border-bottom: 1px solid #878787;">이전 기록(실시간 해석 내용은 아래에 업데이트 됩니다.)</div>
+                </div>
+
+                <div id="log-container"></div> 
+            </div>
+        </div>
+        <!--------------------채팅창 html ------------------------>
+        <div id="chat-box">
+            <div id="user-count-container">
+                Currently connected users: <span id="user-count">0</span>
+                <hr style="border-color: #c5c0c0">
+            </div>
+            <div id="chat-container">
+                <ul id="messages" style="word-break: break-all;"></ul> <!-- Messages will be displayed here -->
+                <div id="input-container">
+                    <input type="text" id="nickname-input" placeholder="User name...">
+                    <input type="text" id="chat-input" placeholder="Type your message...">
+                </div> 
+                <button id="send-button">Send</button>   
+            </div>
+        </div>
+    </div>    
+    
+    <!-------------------- footer ------------------------>
+    <footer id="footer"> 
+        <div style="color:#FFF">
+            2023-Capstone
+        </div>
+    </footer>
+    
+    <script type="text/javascript">
+        /*------------ 음성, 영상 감정 데이터 --------------*/
+        let EmotionData; // 데이터를 저장할 변수
+        let TextData; // 데이터를 저장할 변수
+        
+        // 현재 시간을 가져오는 함수
+        function getCurrentDateTime() {
+            const now = new Date();
+            now.setSeconds(now.getSeconds() - 30); // 현재 시간에서 30초를 뺌
+            const year = now.getFullYear(); // 년
+            const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월
+            const day = now.getDate().toString().padStart(2, '0'); // 일
+            const hours = now.getHours().toString().padStart(2, '0'); // 시간
+            const minutes = now.getMinutes().toString().padStart(2, '0'); // 분
+            const seconds = now.getSeconds().toString().padStart(2, '0'); // 초
+
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        // emotion 데이터 요청
+        setInterval(function() {
+            fetch('/emotion', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 받은 데이터를 변수에 저장
+                EmotionData = data;
+                // 이 변수에 저장된 데이터를 언제든지 활용할 수 있음
+                console.log(EmotionData); // 예시: 데이터 콘솔에 출력
+                // EmotionData 객체가 있다고 가정하고, 그 안에 emotion 속성이 있다고 가정
+                document.getElementById('face-emotion-value').innerText = EmotionData.face_emotion;
+                document.getElementById('voice-emotion-value').innerText = EmotionData.voice_emotion;
+
+            })
+            .catch(error => console.error('Error:', error));
+        }, 5000); // 5초마다 요청을 보냄
+        
+        // text 데이터 요청
+        setInterval(function() {
+            fetch('/text', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 받은 데이터를 변수에 저장
+                TextData = data;
+                // 이 변수에 저장된 데이터를 언제든지 활용할 수 있음
+                console.log(TextData); // 예시: 데이터 콘솔에 출력
+                document.getElementById('text-value').innerText = TextData.speech;
+                document.getElementById('translation-value').innerText = TextData.translation;
+                document.getElementById('interpretation-value').innerText = TextData.interpretation;
+                document.getElementById('text-emotion-value').innerText = TextData.stance_score;
+
+                const currentTime = getCurrentDateTime(); // 현재 시간 가져오기
+                const newLog = document.createElement('div');
+                newLog.classList.add('interpret-container'); // 원하는 클래스 추가
+                // 새로운 데이터 추가
+                newLog.innerHTML = `
+                    <div style="display: flex; padding-top: 1%; font-size: 10px">
+                        <div id = "stance-score" style="padding-left: 2%">${TextData.stance_score}</div>
+                        <div id = "time-line" style="padding-left:80%;">${currentTime}</div>
+                    </div>
+                    <div class="text-box">
+                        <div style="font-weight: bold; color:#806D6D; min-width: 35px;">원문</div>
+                        <div style="padding-left: 1%;">${TextData.speech}</div>
+                    </div>
+                    <div class="text-box">
+                        <div style="font-weight: bold; color:#806D6D; min-width: 35px;">번역</div>
+                        <div style="padding-left: 1%;">${TextData.translation}</div>
+                    </div>
+                    <div class="text-box">
+                        <div style="font-weight: bold; color:#806D6D; min-width: 35px;">해석</div>
+                        <div style="padding-left: 1%;">${TextData.interpretation}</div>
+                    </div>
+                `
+                
+                // log-container에 새로운 데이터 추가
+                const logContainer = document.getElementById('log-container');
+                logContainer.prepend(newLog); // 새로운 데이터를 맨 위에 추가
+            })
+            .catch(error => console.error('Error:', error));
+        }, 30000); // 30초마다 요청을 보냄
+
+
+        /*------------ 사용자 수 확인 --------------*/
+        const socket = io();
+        socket.on('user_count', function(count) {
+            document.getElementById('user-count').textContent = count;
+        });
+
+        $(document).ready(function(){
+            console.log('http://'+document.domain + ':' + location.port)
+            var socket = io.connect('http://'+document.domain + ':' + location.port); 
+            
+            // 서버로부터 채팅 메시지를 받았을 때 처리
+             socket.on('message', function (msg) {
+                // console.log(msg);
+                $('#messages').append('<li><strong>' + msg.nickname + '</strong>: ' + msg.message + '</li>');
+                // 새로운 메시지가 추가될 때마다 자동 스크롤
+
+                $("#messages").scrollTop($("#messages")[0].scrollHeight);
+            });
+
+            // 메시지 전송 시 닉네임도 함께 전송
+            $('#send-button').on('click', function () {
+                var nickname = $('#nickname-input').val();
+                var message = $('#chat-input').val();
+                if (nickname.trim().length <= 10 && message.trim().length <= 250 && message.trim() !== '') {
+                    // 닉네임이 10글자 이하이고 메시지가 250글자 이하이며 값이 비어있지 않은 경우에만 전송
+                    socket.send({ nickname: nickname, message: message });
+                    $('#chat-input').val('');
+                }
+            });
+
+            // 키보드 Enter 눌렀을 때도 닉네임과 함께 전송
+            $('#chat-input').on('keypress', function (e) {
+                if (e.which === 13) {
+                    var nickname = $('#nickname-input').val();
+                    var message = $('#chat-input').val();
+                    if (nickname.trim().length <= 10 && message.trim().length <= 250 && message.trim() !== '') {
+                        // 닉네임이 10글자 이하이고 메시지가 250글자 이하이며 값이 비어있지 않은 경우에만 전송
+                        socket.send({ nickname: nickname, message: message });
+                        $('#chat-input').val('');
+                    }
+                }
+            });
+        });
+    </script>
+</body> 
+</html>
